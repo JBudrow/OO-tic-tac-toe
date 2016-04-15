@@ -1,3 +1,5 @@
+require 'pry'
+
 require "./oo_board"
 require "./oo_game"
 require "./oo_player"
@@ -12,13 +14,5 @@ require "./oo_player"
 # ---|---|---
 #  7 | 8 | O
 
-
-
-# def play()
-# end
-#
-# def play_again?()
-# end
-
 game = Game.new
-game.tictactoe
+game.play

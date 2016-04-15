@@ -1,26 +1,22 @@
+require 'pry'
+
 class Player
-  attr_reader :piece, :choice
   def initialize
-    @piece = piece
-    @choice = choice
+    @player = 'X'
   end
 
-  def choose_piece
-    puts "Would you like to be 'X' or 'O' >> "
-    @piece = gets.chomp.upcase
-    until ["X","O"].include?(@piece)
-      puts "Invalid input, please only choose 'X' or 'O' >> "
-      @piece = gets.chomp.upcase
-    end
-    @piece
+  def label
+    @player
   end
 
-  def take_turn(available_spaces)
-    @choice = gets.chomp.to_i
-    until available_spaces.include?(@choice)
-      puts "Invalid space, try again >> "
-      @choice = gets.chomp.to_i
+  def take_turn(board)
+    print 'Choose a slot [1-9]: '
+    choice = gets.chomp.to_i
+    slot = board.available_slots
+    until slot.include?(choice)
+      puts "You have to choose an available position"
+      choice = gets.chomp.to_i
     end
-    @choice
+    choice
   end
 end

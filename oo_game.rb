@@ -1,34 +1,33 @@
+
 class Game
-  attr_accessor :board, :player
   def initialize
-    @board = Board.new
     @player = Player.new
+    @board = Board.new
   end
 
   def greet
-    puts "Welcome to TIC-TAC-TOE!"
+    puts 'Welcome to TIC-TAC-TOE!'
   end
 
-  def next_turn
-    @player == "X" ? "O" : "X"
+  def rotate(current)
+    current == 'X' ? 'O' : 'X'
   end
 
-  def tictactoe
-    display
+  def play
     greet
-      until game_over?(@board) do
-        display
-        take_turn(available_spaces)
-        place_piece(choice, piece)
-        next_turn
+    current = @player.label
+    until @board.win? || @board.draw? do
+      @board.display
+      move = @player.take_turn(@board)
+      @board.board[move-1] = current
+      current = rotate(current)
+    end
+    after_word
     end
   end
 
   def after_word
-    if win?(@board)
-      puts "Congratulations #{@player}!"
-    else
-      puts "Better luck next time #{@player}."
+    if @board.win?
+      puts "Game over. #{@player.label} is victorious!"
     end
   end
-end
